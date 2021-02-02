@@ -7,9 +7,12 @@ from pathlib import Path
 executed_on = time.strftime('%Y-%m-%d %H:%M:%S')
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
-current_dir = Path(__file__).parent.resolve()
-DATA_PATH = str(current_dir)
-print(DATA_PATH)
+# current_dir = Path(__file__).parent.resolve()
+# DATA_PATH = str(current_dir)
+# print(DATA_PATH)
+
+current_dir = os.getcwd()
+print(current_dir)
 
 
 def fetch_i18nRegions():
@@ -38,7 +41,7 @@ def main():
 
     print(f"{executed_on} :: Number of regions supported : {len(items)}")
 
-    with open(f"{DATA_PATH}/i18nRegions_list.json", "w", encoding="utf-8") as f:
+    with open(f"{current_dir}/i18nRegions_list.json", "w", encoding="utf-8") as f:
         json.dump(items, f, indent=4)
         print(f"{executed_on} :: Done!")
 
