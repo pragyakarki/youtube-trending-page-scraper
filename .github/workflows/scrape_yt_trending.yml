@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Scrape YouTube Trending Page
+
+on:
+  push:
+    branches: [main]
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Run YouTube Trending Page Scraper
+        env:
+          YOUTUBE_DATA_API_KEY_FOR_GITHUB_1: ${{ secrets.YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 }}
+          YOUTUBE_DATA_API_KEY_FOR_GITHUB_2: ${{ secrets.YOUTUBE_DATA_API_KEY_FOR_GITHUB_2 }}
+        run: |
+          python yt_trending.py
+      - name: Commit and push
+        run: |-
+          git config --global user.email "Scrape-YT-Trending-bot@example.com"
+          git config --global user.name "Scrape-YT-Trending-bot"
+          git add -A
+          timestamp=$(date -u)
+          git commit -m "Latest Data: ${timestamp}" || exit 0
+          git push
