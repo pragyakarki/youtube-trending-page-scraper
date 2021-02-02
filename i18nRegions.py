@@ -7,6 +7,8 @@ import os
 executed_on = time.strftime('%Y-%m-%d %H:%M:%S')
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
+print(YOUTUBE_DATA_API_KEY_FOR_GITHUB_1)
+
 
 def fetch_i18nRegions():
     request_url = f"https://www.googleapis.com/youtube/v3/i18nRegions?part=snippet&key={YOUTUBE_DATA_API_KEY_FOR_GITHUB_1}"
