@@ -16,6 +16,8 @@ def fetch_i18nRegions():
     print(
         f"{executed_on} :: RESPONSE Status-Code: {response.status_code} || Content-Type: {response.headers['content-type']}")
 
+    print(response)
+
     if response.status_code == 429:
         print(
             f"{executed_on} :: Temporarily BANNED due to excess requests. EXITING...")
