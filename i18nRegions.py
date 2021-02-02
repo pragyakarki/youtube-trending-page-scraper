@@ -2,12 +2,12 @@ import requests
 import time
 import json
 import os
-
+import pathlib import Path
 
 executed_on = time.strftime('%Y-%m-%d %H:%M:%S')
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
 
-print(YOUTUBE_DATA_API_KEY_FOR_GITHUB_1)
+current_dir = Path(__file__).parent.resolve()
 
 
 def fetch_i18nRegions():
@@ -17,8 +17,6 @@ def fetch_i18nRegions():
 
     print(
         f"{executed_on} :: RESPONSE Status-Code: {response.status_code} || Content-Type: {response.headers['content-type']}")
-
-    print(response.json())
 
     if response.status_code == 429:
         print(
@@ -38,7 +36,7 @@ def main():
 
     print(f"{executed_on} :: Number of regions supported : {len(items)}")
 
-    with open("i18nRegions_list.json", "w", encoding="utf-8") as f:
+    with open(f"{current_dir}/i18nRegions_list.json", "w", encoding="utf-8") as f:
         json.dump(items, f, indent=4)
         print(f"{executed_on} :: Done!")
 
