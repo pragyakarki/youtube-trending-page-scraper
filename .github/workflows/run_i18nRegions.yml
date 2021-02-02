@@ -1,0 +1,35 @@
+name: run_i18nRegions
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '*/5 * * * *'
+
+jobs:
+  build:
+    
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt          
+      - name: Run YouTube Available Regions scraper
+        env:
+          YOUTUBE_DATA_API_KEY_FOR_GITHUB_1: ${{ secrets.YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 }}
+        run: |
+          python i18nRegions.py 
+      - name: Commit and push
+        run: |-
+         git diff
+         git config --global user.email "i18nRegions-bot@example.com"
+         git config --global user.name "i18nRegions-bot"
+         git diff --quiet || (git add i18nRegions_list.json && git commit -m "Updated with latest list of countires YouTube in available in.")
+         git push origin HEAD:main 
