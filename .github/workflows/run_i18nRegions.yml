@@ -28,8 +28,7 @@ jobs:
           python i18nRegions.py 
       - name: Commit and push
         run: |-
-         git diff
          git config --global user.email "i18nRegions-bot@example.com"
          git config --global user.name "i18nRegions-bot"
-         git diff --quiet || (git add i18nRegions_list.json && git commit -m "Updated with latest list of countires YouTube in available in.")
-         git push origin HEAD:main 
+         git add i18nRegions_list.json && git commit -m "Updated with latest list of countires YouTube in available in."
+         git push
