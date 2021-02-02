@@ -16,7 +16,7 @@ def fetch_i18nRegions():
     print(
         f"{executed_on} :: RESPONSE Status-Code: {response.status_code} || Content-Type: {response.headers['content-type']}")
 
-    print(response)
+    print(response.json())
 
     if response.status_code == 429:
         print(
