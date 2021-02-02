@@ -2,7 +2,7 @@ import requests
 import time
 import json
 import os
-import pathlib import Path
+from pathlib import Path
 
 executed_on = time.strftime('%Y-%m-%d %H:%M:%S')
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
