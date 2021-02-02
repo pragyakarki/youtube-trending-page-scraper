@@ -41,7 +41,7 @@ def main():
 
     print(f"{executed_on} :: Number of regions supported : {len(items)}")
 
-    with open(os.path.join(self.path, "i18nRegions_list.json"), "w", encoding="utf-8") as f:
+    with open(os.path.join(current_dir, "i18nRegions_list.json"), "w", encoding="utf-8") as f:
         json.dump(items, f, indent=4)
         print(f"{executed_on} :: Done!")
 
