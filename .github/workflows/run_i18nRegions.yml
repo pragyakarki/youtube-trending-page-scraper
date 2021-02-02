@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "0 */12 * * *"
+    - cron: "*/5 * * * *"
 
 jobs:
   build:
@@ -31,5 +31,5 @@ jobs:
           git config --global user.name "i18nRegions-bot"
           git add i18nRegions_list.json
           timestamp=$(date -u)
-          git commit -m "Latest Data: ${timestamp}"
+          git commit -m "Latest Data: ${timestamp}" || exit 0
           git push
