@@ -2,7 +2,7 @@ name: run_i18nRegions
 
 on:
   schedule:
-    - cron: "*/5 * * *" # Runs every 5th minute
+    - cron: '*/5 * * * *'
 
 jobs:
   build:
