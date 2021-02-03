@@ -1,15 +1,11 @@
-# This is a basic workflow to help you get started with Actions
-
-name: Scrape YouTube Trending Page
 
 on:
   schedule:
-    - cron: "0 * * * *"
-
+    - cron:  '0 * * * *' # Every hour. Ref https://crontab.guru/examples.html
+name: Scrape YouTube Trending Page
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - uses: actions/checkout@v2
       - name: Set up Python 3.8
