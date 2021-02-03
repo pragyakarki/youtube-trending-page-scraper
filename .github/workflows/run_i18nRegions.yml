@@ -1,7 +1,7 @@
 
 on:
   schedule:
-    - cron: '*/5 * * * *'
+    - cron: '0 0 * * *' # Run Every Night at Midnight
       
 name: run_i18nRegions
 jobs:
@@ -26,7 +26,7 @@ jobs:
         run: |-
           git config --global user.email "i18nRegions-bot@example.com"
           git config --global user.name "i18nRegions-bot"
-          git add i18nRegions_list.json
+          git add -A
           timestamp=$(date -u)
           git commit -m "Latest Data: ${timestamp}" || exit 0
           git push
