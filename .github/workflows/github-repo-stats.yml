@@ -1,0 +1,15 @@
+on:
+  schedule:
+    # Run this once per day (hours in UTC time zone).
+    # Towards the end of the day for keeping the last
+    # data point meaningful.
+    - cron: "* 23 * * *"
+  workflow_dispatch: # Allow for running this manually.
+
+jobs:
+  j1:
+    name: github-repo-stats
+    runs-on: ubuntu-latest
+    steps:
+      - name: github-repo-stats
+        uses: jgehrcke/github-repo-stats@v1.0.0
