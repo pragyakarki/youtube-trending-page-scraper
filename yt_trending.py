@@ -54,7 +54,7 @@ def write_to_file(country_code, country_data):
 
     print(f"{executed_on} :: Writing {country_code} data to file...")
 
-    executed_time = time.strftime('%y.%m.%d %H')
+    executed_time = time.strftime('%y.%m.%d') # Create one folder for each day
     path = os.path.join(current_dir, executed_time)
     if not os.path.exists(path):
         os.makedirs(path)
