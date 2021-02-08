@@ -2,6 +2,9 @@
 on:
   schedule:
     - cron:  '0 * * * *' # Every hour. Ref https://crontab.guru/examples.html
+      
+  workflow_dispatch: # Allow for running this manually.
+  
 name: Scrape YouTube Trending Page
 jobs:
   build:
