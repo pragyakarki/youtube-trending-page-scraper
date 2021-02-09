@@ -54,11 +54,17 @@ def write_to_file(country_code, country_data):
 
     print(f"{executed_on} :: Writing {country_code} data to file...")
 
-    executed_time = time.strftime('%y.%m.%d') # Create one folder for each day
-    path = os.path.join(current_dir, executed_time)
+    executed_day = time.strftime('%y.%m.%d') # Create one folder for each day
+    day_path = os.path.join(current_dir, executed_day)
+    if not os.path.exists(day_path):
+        os.makedirs(day_path)
+    
+    # Had to create subdirectories by hour since github has 1000 file limits per directory
+    executed_hour = time.strftime('%y.%m.%d %H') # Create one folder for each hour
+    path = os.path.join(day_path, executed_hour)
     if not os.path.exists(path):
         os.makedirs(path)
-
+         
     with open(f"{path}/{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json", "w+", encoding='utf-8') as file:
         json.dump(country_data, file, ensure_ascii=False, indent=4)
         print(f"{executed_on} :: Done for {country_code}")
