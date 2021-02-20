@@ -5,7 +5,6 @@ import time
 import os
 import argparse
 
-executed_on = time.strftime('%Y-%m-%d %H:%M:%S')
 current_dir = os.getcwd()
 
 YOUTUBE_DATA_API_KEY_FOR_GITHUB_1 = os.environ['YOUTUBE_DATA_API_KEY_FOR_GITHUB_1']
@@ -26,11 +25,11 @@ def api_request(page_token, country_code, api_key):
     response = requests.get(request_url)
 
     print(
-        f"{executed_on} :: RESPONSE Status-Code: {response.status_code} || Content-Type: {response.headers['content-type']}")
-
+        f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: RESPONSE Status-Code: {response.status_code} || Content-Type: {response.headers['content-type']}")
+   
     if response.status_code == 429:
         print(
-            f"{executed_on} :: Temporarily BANNED due to excess requests. EXITING...")
+            f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Temporarily BANNED due to excess requests. EXITING...")
         sys.exit()
     return response.json()
 
@@ -44,15 +43,16 @@ def get_pages(country_code, api_key, next_page_token="&"):
         next_page_token = f"&pageToken={next_page_token}&" if next_page_token is not None else next_page_token
 
         items = video_data_page_json.get('items')
-        for item in items:
-            country_data.append(item)
+        if items:
+            for item in items:
+                country_data.append(item)
 
     return country_data
 
 
 def write_to_file(country_code, country_data):
 
-    print(f"{executed_on} :: Writing {country_code} data to file...")
+    print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Writing {country_code} data to file...")
 
     executed_day = time.strftime('%y.%m.%d') # Create one folder for each day
     day_path = os.path.join(current_dir, executed_day)
@@ -67,7 +67,7 @@ def write_to_file(country_code, country_data):
          
     with open(f"{path}/{time.strftime('%y.%m.%d %H.%M.%S')}_{country_code}_YouTube_Trending_Videos.json", "w+", encoding='utf-8') as file:
         json.dump(country_data, file, ensure_ascii=False, indent=4)
-        print(f"{executed_on} :: Done for {country_code}")
+        print(f"{time.strftime('%Y-%m-%d %H:%M:%S')} :: Done for {country_code}")
 
 
 def get_data(country_codes, api_key):
