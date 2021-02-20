@@ -43,7 +43,9 @@ def get_pages(country_code, api_key, next_page_token="&"):
         next_page_token = f"&pageToken={next_page_token}&" if next_page_token is not None else next_page_token
 
         items = video_data_page_json.get('items')
-        if items:
+        # Handling :: TypeError: 'NoneType' object is not iterable
+        # https://stackoverflow.com/questions/3887381/typeerror-nonetype-object-is-not-iterable-in-python
+        if items is not None:
             for item in items:
                 country_data.append(item)
 
